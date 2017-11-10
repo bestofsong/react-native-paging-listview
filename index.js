@@ -30,7 +30,7 @@ export default class PagedListView extends PureComponent {
     super(props);
     this.state = {
       refreshing: false,
-      hasMore: {}.hasOwnProperty.call(props, 'hasMore') ? !!props.hasMore : true,
+      hasMore: true,
       loadingMore:false,
     };
     this._onPullDown = this._onPullDown.bind(this);
@@ -43,7 +43,7 @@ export default class PagedListView extends PureComponent {
 
   componentWillMount() {
     if (!this.props.items || !this.props.items.length) {
-      this.setState({ hasMore:true }, () => this.loadMore(true));
+      this.loadMore(true);
     }
   }
 
@@ -235,7 +235,6 @@ PagedListView.propTypes = {
 PagedListView.defaultProps = {
   pageSize: 10,
   startIndex: 1,
-  hasMore: true,
   loadMorePrompt: '加载更多',
   noMorePrompt: '全部加载完毕',
 };
